@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   //instanciamos un objeto basado en una clase añadiendo los paréntesis.
@@ -23,12 +23,56 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answer': [
+        {'text': 'black', 'score': 10},
+        {'text': 'green', 'score': 5},
+        {'text': 'blue', 'score': 6},
+        {'text': 'yellow', 'score': 0},
+      ]
+    },
+    {
+      'questionText': 'What\'s your favorite aniaml?',
+      'answer': [
+        {'text': 'rabbit', 'score': 4},
+        {'text': 'elefant', 'score': 7},
+        {'text': 'lion', 'score': 8},
+        {'text': 'dog', 'score': 0}
+      ]
+    },
+    {
+      'questionText': 'What\'s your favorite fruit?',
+      'answer': [
+        {'text': 'banana', 'score': 0},
+        {'text': 'apple', 'score': 2},
+        {'text': 'mango', 'score': 5},
+        {'text': 'kiwi', 'score': 8},
+      ]
+    },
+  ];
   var _questionIndex =
       0; //podríamos usar 'int' en vez de 'var', pero como la hemos inicializado en =0, flutter ya sabe que es un int, por lo cual se considera usar "var" una mejor práctica
-  void _answerQuestion() {
+  var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      //tenemos que resetear estas variables dentro del setState() para que flutter entienda que cambió el State, y él se encargará de re-renderizar la app.
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+    //es lo mismo que poner _totalScore = _totalScore + score
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    }
 
     print(_questionIndex);
   }
@@ -39,46 +83,20 @@ class _MyAppState extends State<MyApp> {
   //De hecho, no tenemos la opción de no sobreescribirlo, estamos obligados a crear llamar al método build, pero con el "@override" dejamos claro que no fue un error sobreescribir el método.
   Widget build(BuildContext context) {
     //creamos un 'map' -> una lista de pares de valores (key + value)
-    var questions = [
-      {
-        'questionText': 'What\'s your favorite color?',
-        'answer': ['black', 'Red', 'Green', 'Blue']
-      },
-      {
-        'questionText': 'What\'s your favorite aniaml?',
-        'answer': ['rabbit', 'Snake', 'Elefant', 'Lion']
-      },
-      {
-        'questionText': 'What\'s your favorite fruit?',
-        'answer': ['banana', 'Apple', 'Orange', 'Melon']
-      },
-    ];
+
     // - positional arguments: each value passed ends up depending on the position
     // - named arguments: no data in order, target every argument by its name
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('My First App'),
-        ),
-        body: Column(
-          children: [
-            //(27) -> nuevo custom widget.
-            Question(questions[_questionIndex]['questionText']),
-            // para acceder al elemento de una lista, podemos usar nombreLista[indice] o bien nombreLista.elementAt(indice)
-            ...(questions[_questionIndex]['answer'] as List<String>)
-                .map((answer) {
-              return Answer(_answerQuestion, answer);
-            }).toList()
-            // (33)
-            // para cualquier lista (array), podemos usar el método map()
-            // el método map ejecutará una función (que tenemos que mandarle como argumento) para cada elemento en la lista.
-            // en este caso estamos iterando la lista valores de 'answer'
-            // .toList() -> para transformar un grupo de objetos en una lista
-            // ... -> para 'desagregar' los objetos de una lista, o sea para quitarlos de la lista y dejarlos en su padre
-            // "as List<String>" -> lo tenemos que poner porque Dart no puede saber que ese objeto es una lista. Le tenemos que decir específicamente que interprete eso como una lista de strings.
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            title: Text('My First App'),
+          ),
+          body: _questionIndex < _questions.length
+              ? Quiz(
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: _questions)
+              : Result(_totalScore, _resetQuiz)),
       //MaterialApp y Text no son funciones, sino clases. Y aún así, les pasamos información
       //el 'Constructor', es una función especial dentro de una clase (por lo tanto, un método) que se ejecuta solamente una vez cuando creamos un nuevo objeto basado en esa clase, o sea, cuando llamamos a una clase y le pasamos valores
       //se crea un constructor repitiendo el nombre de la clase, paréntesis y llaves
@@ -175,6 +193,20 @@ class _MyAppState extends State<MyApp> {
       // (31)
       // "Lifting the State up" -> se maneja el State en el widget que hay en común, en este caso, se maneja en MyApp (en main.dart), que es el widget que tienen en común answer y question.
       // El State está en el común denominador, en el lugar compartido donde están los widgets que necesitan este State. En este caso, es el padre directo.
+      //
+      // (34) Tipos de variables constantes:
+      // > FINAL: el valor no cambia desde que se inicializa. Se le puede asignar un valor al inicio del programa, pero después ya nunca cambia.
+      //     en runtime el valor se bloquea, pero en el momento de escribir el código, y de compilar, el valor es incierto. "Runtime Constant Value"
+      // > CONSTANTE: "Compile Time Constant", o sea el valor nunca cambia desde que se compila.
+      //     no podemos asignar un nuevo valor a una constante.
+      // (Técnicamente, cuando definimos una variable, Dart guarda la dirección de ese objeto en memoria, no el objeto en sí.)
+      // Podemos hacer constante la variable, con lo cual no se podrá asignar un nuevo valor a esa variable.
+      // O podemos hacer constante solamente el valor de la variable, con lo cual no se podrá alterar ese valor pero sí se podrá reescribir la variable. Por ejemplo, si se trata de una lista no podremos añadir un item con .add(), pero si podremos asignar una nueva lista.
+      //
+      // Para crear widgets dependientes de una condición:
+      // Expresion condicional ? codigo que se executa if true : codigo que se ejecuta if false,
+      //
+      // Siempre es recomandado separar el código en diferentes widgets, en diferentes archivos.
     );
   }
 }
