@@ -8,10 +8,10 @@ Este proyecto está hecho siguiendo el curso de desarrollo de apps en flutter. C
 
 Consiste en 3 pantallas de preguntas con 4 posibles respuestas y una pantalla final de "resultado", en el que la aplicación te dice "cómo eres" en función de qué respondiste.
 
-![Pantalla pregunta 1](https://github.com/eloicasamayor/quiz_app_flutter/images/sc1.png)
-![Pantalla pregunta 2](https://github.com/eloicasamayor/quiz_app_flutter/images/sc2.png)
-![Pantalla pregunta 3](https://github.com/eloicasamayor/quiz_app_flutter/images/sc3.png)
-![Pantalla resultado 1](https://github.com/eloicasamayor/quiz_app_flutter/images/sc4.png)
-![Pantalla resultado 2](https://github.com/eloicasamayor/quiz_app_flutter/images/sc5.png)
+![Pantalla pregunta 1](https://github.com/eloicasamayor/quiz_app_flutter/images/sc1.jpg)
+![Pantalla pregunta 2](https://github.com/eloicasamayor/quiz_app_flutter/images/sc2.jpg)
+![Pantalla pregunta 3](https://github.com/eloicasamayor/quiz_app_flutter/images/sc3.jpg)
+![Pantalla resultado 1](https://github.com/eloicasamayor/quiz_app_flutter/images/sc4.jpg)
+![Pantalla resultado 2](https://github.com/eloicasamayor/quiz_app_flutter/images/sc5.jpg)
 
 
