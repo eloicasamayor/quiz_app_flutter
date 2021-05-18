@@ -17,7 +17,7 @@ All the code is commented with explanations on every new thing I learn
 - We can divide the widgets in two categories: Visible (input/ output) and Invisible (Layout / Control).
 - Styling and positioning is done via code (in the Widget tree)
 - How to pass some data to constructors
-- Some Dart fundamentals (variables types, constants, final variables, Functions, private and public properties and functions, 
+- Some Dart fundamentals:variables types, constants and final variables, Functions, constructors, properties and methods, 
 
 
 
