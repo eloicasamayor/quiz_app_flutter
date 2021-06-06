@@ -1,13 +1,9 @@
-# flutter_course
-It was My first Flutter project.
+# Learning flutter: my first app
 
-## Following a Flutter Course on Udemy
-
-## Following the course
-
-Developed following this udemy course [Flutter & Dart - The Complete Guide [2021 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
+I am following this udemy course [Flutter & Dart - The Complete Guide [2021 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). This project has the only objective form me to code along the course and to learn. 
 
 ## Learning Notes
+Here I've been taking the notes while following the course.
 ### Create flutter project
 Command to create a flutter project from the terminal. The project name cannot contain spaces or dashes
         flutter create name_of_the_project
