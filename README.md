@@ -1,6 +1,7 @@
 # flutter_course
+It was My first Flutter project.
 
-A new Flutter project.
+## Following a Flutter Course on Udemy
 
 ## Following the course
 
