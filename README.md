@@ -60,19 +60,157 @@ Run the app:
 - From terminal: "flutter run" command
 - From the visual studio menú: "debug" > "start Debugging" or "start without debugging"
 
-## widgets
+## widgets basics
 - In a flutter project, the depeloper build an UI by adding **widgets**, the building blocks of the user interface. 
     - There are a lot of **built in widgets**, shipped with the flutter framework. There are widgets for everything: for text, for buttons, for images... You can configure all the widgets to change their appereance.
     - We can also make our own **custom widgets**, grouping some others putting them somewhere in the screen.
 
 ## Some Dart basics
+### Comments
+In dart we comment any line by adding two slices (//) before the line of code.
 
 ### Functions
 Functions are code snippets that you can execute multiple times and any time you want. It is defined by:
--  A **function name**. It has to follow a naming convention which is called camelcase. It should not have spaces between words. The first word whould start with a lowercase character and the other words will start with uppercase letters. **"main"** is a special function name. The main function is the entry point of a dart application, it is the first function to be called automatically by dart when the app starts. 
-- **Parentesis**, where the function can recive **arguments**, the inputs for the function. The arguments are separed by commas and they can have any name we want.
-- Then we have the **curly braces** that surround the **function body**, the code executed when the function gets called. 
-Before the function name there is the **type** of the function. Dart is a typed language, which means that everything has a type. So the type indicates what type of data the function returns. When it returns nothing, the return type is void.
+#### function name
+It has to follow a naming convention which is called camelcase. It should not have spaces between words. The first word whould start with a lowercase character and the other words will start with uppercase letters. **"main"** is a special function name. The main function is the entry point of a dart application, it is the first function to be called automatically by dart when the app starts. 
+#### Arguments
+The inputs for the function, they are inside de parentesis. The arguments are separed by commas and they can have any name we want. There can be 0 arguments.
+- **Positional arguments**: when we call the function, we provide the values of the arguments separated by commas. In the function, they will be asigned to every argument based on the position. The first value to the first argument, the second with the second... and so on.
+- **Named arguments**: when we call the function, we write the name of the argument followed by a colon and the value for it. 
+####  body
+The code executed when the function gets called is limitated between curly braces. For every expression in dart we have to add a semicolon (;) at the end, except for the definition of a function, there we don't use the semicolon.
+#### type
+Before the function name there is the **type** of the function. Dart is a typed language, which means that everything has a type. So the type indicates what type of data the function returns. When it returns nothing, the return type is void. As dart is a strictly typed programming language, we need to indicate the type of data a function returns and the type of every argument. If we don't indicate the type of data, dart asumes the data is a dynamic type, and the compiler cannot help us to avoid mismatch data type errors. If posible, we should avoid dinamic type, and asign explicit types.
+#### call a function 
+To call a function we write the function name followed by the parentesis. If the function take arguments, we put them inside the parentesis. If it doesn't, we write the parentesis with nothing inside.
+- print() is a predefined dart function that prints somethng on the console.
+#### return
+Inside the function we can use the special keyword "return" to express what will be the result of that function. The type of the object returning must be the same as the function itself. If it's a void function, it wouldn't return anything.
+
+
+### Objects
+Everything in dart is an object, which is a data structure that has some conflicts logic inside.
+There are some special types of predefined objects in dart. Some of them are:
+- **String**: a text. It's defined between cuotes ('simple' or "double")
+- **Integer**: numbers without decimal places
+- **double**: numbers with decimal places.
+- **num**: any number: can be double or int
+
+### Variables
+We can store data in memory with the help of variables so we can use that data some lines later in the same code. We don't want to store it in a file or in a database, but in the memory of the device.
+- before the name of the variable we use the keyword "var", so dart understand we are creating a variable. Or we can insted tell dart the type of data will be stored. If we asign a value when initializing the variable it's considered a better practice to use the "var" kayword.
+- We create a variable by giving it any name we want. We follow the same naming convention as for naming functions.
+- We asign a value to that with a equal sign. We also can reuse a variable by reasigning another value to the same variable, so it will be overwritten.
+
+### Classes
+We write classes to define objects in dart. Structure of a class:
+- keyword "class"
+- class name: should start with UpperCase character
+- class body: inside curly braces
+    - a variable inside a class are called **property**
+    - a function inside a class are called **methods**
+Then, we instantiate the class to create an object based on that class. We can access the data inside an object (for example, the instance of a class), by using a dot (.) followed by a property name.
+
+```dart
+// a class
+class Person {
+    String name = 'Max';
+    int age = 30;
+}
+//a function that returns a double
+double addNumbers(double num1, double, num2) {
+    return num1 + num2;
+}
+// the main function
+void main() {
+    //p1 is an instance of the Person class
+    var p1 = Person();
+    var p2 = Person();
+    p2.name = 'Eloi';
+    double firstResult;
+    firstResult = addNumbers(1,1);
+    print(firstResult + 1); //it prints "3"
+    print(p1.name); //it prints "Max"
+    print(p2.name); //it prints "Eloi"
+}
+```
+#### Short functions =>
+In functions with only one expression in the body, we can get rid of the curly fraces and instead use the "=>". The return of this expression will automatically be returned (if it returns something)
+```dart
+void main(){
+    print(hello);
+}
+// is the same as:
+void main() => print(hello);
+```
+
+### The widget class
+A widget is a special type of object in flutter. To create a widget, we need to create a class based on special flutter class: StatelessWidget().
+To do so, we need to import a file from the flutter package called 'material.dart' and then we define the widget using the keywork "extends" + "StatelessWidget" or "StatefulWidget". We also have to implement a special method (function) inside the class: the **build()** method. This method is called by flutter and takes an argument called "context" of type BuildContext, and it is provided by flutter. build() returns a Widget (which is also a class provided by the material.dart)
+
+```dart
+import 'package:flutter/material.dart';
+void main() {
+    //runApp is a special function provided by material.dart. It construct the widget and calls the build() method.
+    runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+    Widget build(BuildContext context) {
+        return MaterialApp(home: Text('hello world'),);//a named argument called 'home'
+    }
+}
+```
+
+### The Constructors
+A constructor is a function inside a class, so, a method that is different of other methods because it is executed once when we instantiate an object based on that class. 
+We add a constructor by **repeating the name of the class**, the parentesis for arguments and body between curly braces. When inside the constructor, we can use the keyword "this" to reffer to the class level
+```dart
+class Person {
+    String name;
+    int age;
+    // the constructor
+    Person(String inputName, int age){
+        name = inputName; // we can use a different name for the attribute name
+        this.age = age; // or we can use (this. + the property name) to refer to the class property
+    }
+}
+void main(){
+    //when creating the object based on the Person class, we pass the arguments to the constructor.
+    p1 = Person('Eloi', 29);
+}
+```
+We could also use **named arguments**. To do so, we wrap all the arguments in the constructor with curly braces. Then, all theese **arguments will be optional**.
+Now, to call the constructor we'll write the argument name followed by a colon and the value. This concept of named arguments is also available for normal functions, not only constructors.
+We can use the @required annotation to ensure an argument is always required. If we don't provide it, the compiler will yield us.
+```dart
+class Person {
+    String name;
+    int age;
+    // with named arguments we can provide default values with the = sign. In case this is not provided, the default value will be used.
+    Person({@required String inputName, int age = 29 }){
+        name = inputName; 
+        this.age = age;
+    }
+}
+void main(){
+    //when using named arguments, we can change the order.
+    p1 = Person(age: 29, inputName: 'Eloi');
+}
+```
+There is a **shortcut** for getting the data as arguments and assigning it to variables in the class that allow us to get rid of the constructor body. To use it, we have to use the same name to arguments and class variables and target "this.+argumentName".
+```dart
+class Person {
+    String name;
+    int age;
+    // In this short constructor we are asigning the given values recived as arguments to the class variables. The names have to match
+    Person({this.name, this.age});
+}
+void main(){
+    p1 = Person(age: 29, name: 'Eloi');
+}
+```
+
+
 
 
 
