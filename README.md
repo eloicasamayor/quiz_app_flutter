@@ -6,7 +6,9 @@ I am following this udemy course [Flutter & Dart - The Complete Guide [2021 Edit
 Here I've been taking the notes while following the course.
 ### Create flutter project
 Command to create a flutter project from the terminal. The project name cannot contain spaces or dashes
-        flutter create name_of_the_project
+```
+flutter create name_of_the_project
+```
 
 ### Material Design
 It's a design system created and heavily used by Google. It's highly customizable and works on iOS too. Whils material design is built into Flutter, there are alsom Apple styled widgets in the Flutter framework (Cuppertino widgets).
@@ -210,7 +212,13 @@ void main(){
 }
 ```
 
-### Next steps
+### Scaffold
+Is a widget available thanks to having imported material.dart. It has the job of creating a base page designing, coloring and structure for the app.
+It takes some named arguments
+- appBar: an AppBar() widget
+- body: here we will all the widget tree of the page
+
+> Tip: the *flutter extension* will autoformat our code in a very readable way if we add a comma after closing parentesis.
 
 
 
