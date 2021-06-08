@@ -162,7 +162,9 @@ For both examples, it's only the definition of a function, so it's not executed 
 
 ### The Constructor
 A constructor is a function inside a class, so, a method that is different of other methods because it is executed once when we instantiate an object based on that class. 
-We add a constructor by **repeating the name of the class**, the parentesis for arguments and body between curly braces. When inside the constructor, we can use the keyword "this" to reffer to the class level
+We add a constructor by **repeating the name of the class**, the parentesis for arguments and body between curly braces. When inside the constructor, we can use the keyword "this" to refer to the class level.
+<br>We can pass any type of data as an argument, even a pointer to a function
+
 ```dart
 class Person {
     String name;
@@ -177,6 +179,12 @@ void main(){
     //when creating the object based on the Person class, we pass the arguments to the constructor.
     p1 = Person('Eloi', 29);
 }
+```
+We can have **extra constructors** by declaring a function with the functionName equal to the className followed by a dot and the name of the constructor:
+```dart
+Person.old(this.name){
+        age = 65; // this constructor will create a person with the age = 65
+    }
 ```
 We could also use **named arguments**. To do so, we wrap all the arguments in the constructor with curly braces. Then, all theese **arguments will be optional**.
 Now, to call the constructor we'll write the argument name followed by a colon and the value. This concept of named arguments is also available for normal functions, not only constructors.
@@ -208,6 +216,20 @@ void main(){
     p1 = Person(age: 29, name: 'Eloi');
 }
 ```
+### Private classes, functions and variables
+It we want a class to only be available inside a file, we can declare it a private function by adding a _ before the name. Normally the State class of a statefulwidget will be private
+And the same for functions and variables, they will be private if they start by _
+```dart
+// Theese could not be reached from outside the file they are.
+class _MyPrivateClass {
+    var _privateVariable
+    void _privateFunction() {  
+    }
+}
+```
+### Final properties
+When we use the keywork "**final**" before the declaration of a variable, we are telling dart that the value of the variable won't change after the initialization.
+
 ### Lists
 Lists is a type of data that consists on a group of items. In other languages are called **arrays**. It is defined in squared brackets and it's normally used to group related data. 
 ```dart
@@ -229,6 +251,23 @@ questions.add('Celeste'); // this adds 'Celeste' as a new element to the end of 
 questions.remove('Marti'); // this removes 'Marti' from the list, all other items would move and fill the gap
 ```
 [More info about Lists](https://dart.dev/guides/language/language-tour#lists)
+
+### Maps
+A map is a collection of key-value pairs.
+We create a map with {curly braces}. We define the key-value pairs separed by commas:
+- The key. It hasn't to be a string but normally we use a string key.
+- Then we use the colon
+- And then we write the value, that can be any type of data: a string, number, a list, a map... or any object.
+We can access the value of a key-value refering the name of the map followed by the key in square brackets
+```dart
+//this is a map. The value for the key 'questionText' is a string and the value for the key 'answers' is a List of strings.
+var question = 
+    {
+        'questionText': 'What\s your favorite color',
+        'answers': ['Black', 'Red', 'White'],
+    }
+var questionValue = question['questionText'];
+```
 
 ## Widgets
 - In a flutter project, the depeloper build an UI by adding **widgets**, the building blocks of the user interface. 
@@ -279,13 +318,12 @@ Depending on if a widget needs to have a State that could change or not, we have
     - We can have an Internal State. The widget will be re-rendered when either the external input data or internal State changes.
 
 ### StatefulWidget
-
 Is a combination of two classes: 
 - The widget class: one that extends StatefulWidget. It will be rebuilt when the state changes.
     - We should use the builtin method createState() returning the StateObject 
 - The classState: extends State. It will be persistent.
     - In the State class wi add a <pointer> to the widget class
-    - When we want flutter to run the build method, we have to call SetState(). SetState takes a function, so in here we create an anonymous function and inside it we change the value of the data that the UI depends on.
+    - When we want flutter to run the build() method, we have to call SetState(). SetState takes a function, so in here we create an anonymous function and inside it we change the value of the data that the UI depends on.
 ```dart
 class MyApp extends StatefulWidget {
     @override
@@ -319,4 +357,36 @@ class MyAppState extends State<MyApp> {
     }
 }
 ```
+### Mapping Lists to Widgets
+Let's suppose we have a lists of maps for questions and answers of a quiz. We can programatically build widgets based on that lists on map.
+There is method called **.map()** (built in the any List object) that allow us to transform a list into something else. In this case, we can transform a list of maps into a list of widgets.
+The map() method executes a function on every element on the list where we are calling map. So we define an anonymous function inside .map(). This function automatically receives an argument that is the current element in the list. In the body of the function we have to return a new value.
+- The map method returns an iterable, but we have to use another method **.toList()** to convert it to a list.
+- Also, to not have a nested list but to have all items of the list in the parent list, we use a dart operator called **spread operator**. It is defined as three dots (...) and it's used before the list.
+```dart
+  final _questions = [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['black', 'green', 'blue']
+    },
+    {
+      'questionText': 'What\'s your favorite aniaml?',
+      'answers': ['pig', 'rabbit', 'horse']
+    },
+    {
+      'questionText': 'What\'s your favorite fruit?',
+      'answers': ['apple', 'banana', 'orange']
+    },
+  ];
+
+  list of answer() widgets: [
+      // we have to tell dart that the value for the 'answer' key is a list of String
+      ...(questions[_questionIndex]['answers'] as List<String>).map((answer){ 
+          return Answer(answer);
+        }).toList()
+  ]
+```
+
+### Managing the State: "Lifting the State Up"
+The most primitive form of managing the State and sharing it betwen widgets is called "Lifting the State Up". It consists on having the State Data in the part of the widget tree that is common on all widgets where will be needed and pass the data as arguments in the constructors. So to have the State in the parent of all widgets that need it.
 
