@@ -2,43 +2,43 @@
 
 I am following this udemy course [Flutter & Dart - The Complete Guide [2021 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). This project has the only objective form me to code along the course and to learn. 
 
-## Learning Notes
-Here I've been taking the notes while following the course.
-### Create flutter project
+> Here I've been taking notes while following the course. It may be incomplete. The only purpose of this project is to learn learn dart and flutter and to keep it posted so I can review it any time when needed.
+
+## Create flutter project
 Command to create a flutter project from the terminal. The project name cannot contain spaces or dashes
 ```
 flutter create name_of_the_project
 ```
 
-### Material Design
+## Material Design
 It's a design system created and heavily used by Google. It's highly customizable and works on iOS too. Whils material design is built into Flutter, there are alsom Apple styled widgets in the Flutter framework (Cuppertino widgets).
 
-### Flutter vs alternatives
-#### Flutter 
+## Flutter vs alternatives
+### Flutter 
 - uses the Dart programming language and the Flutter framework
 - You get compiled Native apps. Great performance.
 - Does NOT compile to iOS / Android UI Component. Flutter controlls every pixel of the app, so there is a lot of flexibility on the customisation.
 - You can build Cross-platform (mobile, web, desktop)
 - Developed by Google
-#### React Native
+### React Native
 - uses JavaScript and the React.js library
 - You get partialy compiled native apps. Some parts are not compiled but enclosed in the native app and runs as javascript in the native app.
 - Does compile to iOS / Android UI Components. There is less customization options as there are UI components restrictions.
 - You can build mostly mobile apps ( + React Native web)
 - Developed by Facebook
-#### Ionic
+### Ionic
 - uses only Javascript. No frameworks.
 - You get webApp wrapped as a Native app. The advantage is that you can use normal web technologies. A dawnside could be performance.
 - Does not compile to native UI Components. You can build it as in web.
 - you can build Cross-platform (mobile, web, desktop)
 - Developed by Ionic
 
-### IDE: Visual Studio Code
+## IDE: Visual Studio Code
 In order to work with Visual Studio and Flutter really well we should install some **extensions**:
 - Flutter
 - Dart (it's installed automatically when installing the Flutter extension)
 
-#### Folder structure 
+### Folder structure 
 - **/.idea**: holds some configuration for Android Studio
 - **/.vscode**: holds configurations for the IDE. It's created only when you do changes of the vs code config
 - **android**: it holds a complete android project. This is the project which the Flutter SDK will use to merge the flutter code into it. Normally, this is a passive folder, it will be used by flutter but we don't need to work on it.
@@ -54,7 +54,7 @@ In order to work with Visual Studio and Flutter really well we should install so
 - **pubspeck.yaml**: we will work in this file. Here we **configure the dependencies** of the project, the third party packages we may be using. We will also configure other things like fonts, images. It's written in yaml, a text format where indentation is very important.
 - **readme.md**: is the text file where we can include some information of the project. Is the file you are reading right now.
 
-### Emulator
+## Emulator
 Start Android Studio > Configure > AVD Manager
 Create Virtual Device > Phone > Pick one phone > pick last Android stable version image > finish
 
@@ -62,15 +62,11 @@ Run the app:
 - From terminal: "flutter run" command
 - From the visual studio menú: "debug" > "start Debugging" or "start without debugging"
 
-## widgets basics
-- In a flutter project, the depeloper build an UI by adding **widgets**, the building blocks of the user interface. 
-    - There are a lot of **built in widgets**, shipped with the flutter framework. There are widgets for everything: for text, for buttons, for images... You can configure all the widgets to change their appereance.
-    - We can also make our own **custom widgets**, grouping some others putting them somewhere in the screen.
-
 ## Some Dart basics
 ### Comments
-In dart we comment any line by adding two slices (//) before the line of code.
-
+```dart
+//In dart we comment any line by adding two slices before the line of code.
+```
 ### Functions
 Functions are code snippets that you can execute multiple times and any time you want. It is defined by:
 #### function name
@@ -89,7 +85,6 @@ To call a function we write the function name followed by the parentesis. If the
 #### return
 Inside the function we can use the special keyword "return" to express what will be the result of that function. The type of the object returning must be the same as the function itself. If it's a void function, it wouldn't return anything.
 
-
 ### Objects
 Everything in dart is an object, which is a data structure that has some conflicts logic inside.
 There are some special types of predefined objects in dart. Some of them are:
@@ -97,6 +92,8 @@ There are some special types of predefined objects in dart. Some of them are:
 - **Integer**: numbers without decimal places
 - **double**: numbers with decimal places.
 - **num**: any number: can be double or int
+#### The Null value
+"null" is a value that means **nothing**
 
 ### Variables
 We can store data in memory with the help of variables so we can use that data some lines later in the same code. We don't want to store it in a file or in a database, but in the memory of the device.
@@ -163,25 +160,7 @@ onPressed: () {
 ```
 For both examples, it's only the definition of a function, so it's not executed in the build method but it's executed in the onPressed event, so it's great for having it inside the widget arguments.
 
-### The widget class
-A widget is a special type of object in flutter. To create a widget, we need to create a class based on special flutter class: StatelessWidget().
-To do so, we need to import a file from the flutter package called 'material.dart' and then we define the widget using the keywork "extends" + "StatelessWidget" or "StatefulWidget". We also have to implement a special method (function) inside the class: the **build()** method. This method is called by flutter and takes an argument called "context" of type BuildContext, and it is provided by flutter. build() returns a Widget (which is also a class provided by the material.dart)
-Everything that belongs to a widget should go into the same class, so that the widget is a standalone unit. We can add functions to a widget class, we call it methods, but it's still a function.
-
-```dart
-import 'package:flutter/material.dart';
-void main() {
-    //runApp is a special function provided by material.dart. It construct the widget and calls the build() method.
-    runApp(MyApp());
-}
-class MyApp extends StatelessWidget {
-    Widget build(BuildContext context) {
-        return MaterialApp(home: Text('hello world'),);//a named argument called 'home'
-    }
-}
-```
-
-### The Constructors
+### The Constructor
 A constructor is a function inside a class, so, a method that is different of other methods because it is executed once when we instantiate an object based on that class. 
 We add a constructor by **repeating the name of the class**, the parentesis for arguments and body between curly braces. When inside the constructor, we can use the keyword "this" to reffer to the class level
 ```dart
@@ -229,20 +208,6 @@ void main(){
     p1 = Person(age: 29, name: 'Eloi');
 }
 ```
-
-### Scaffold
-Is a widget available thanks to having imported material.dart. It has the job of creating a base page designing, coloring and structure for the app.
-It takes some named arguments
-- appBar: an AppBar() widget
-- body: here we will all the widget tree of the page. It accepts only one widget, so we need to pass a widget with a children parameter (not child but children), for example the Column() widget, that takes a list of widgets in the children parameter.
-
-> Tip: the *flutter extension* will autoformat our code in a very readable way if we add a comma after closing parentesis.
-
-### Different types of widgets
-- There are **Visible** widgets, for Output & Input. For example the button, text, card... that are drown onto the screen and the user can see them.
-- There are **Invisible** widgets that help us with Layout & Control for the structure of our app. For example Row, Column, ListView... 
-There is the Contaner() widget, that by default is invisible but you can give some style and it could become visible.
-
 ### Lists
 Lists is a type of data that consists on a group of items. In other languages are called **arrays**. It is defined in squared brackets and it's normally used to group related data. 
 ```dart
@@ -264,12 +229,94 @@ questions.add('Celeste'); // this adds 'Celeste' as a new element to the end of 
 questions.remove('Marti'); // this removes 'Marti' from the list, all other items would move and fill the gap
 ```
 [More info about Lists](https://dart.dev/guides/language/language-tour#lists)
-### The Null value
-"null" is a value that means **nothing**
 
+## Widgets
+- In a flutter project, the depeloper build an UI by adding **widgets**, the building blocks of the user interface. 
+    - There are a lot of **built in widgets**, shipped with the flutter framework. There are widgets for everything: for text, for buttons, for images... You can configure all the widgets to change their appereance.
+    - We can also make our own **custom widgets**, grouping some others putting them somewhere in the screen.
 
+### The widget class
+A widget is a special type of object in flutter. To create a widget, we need to create a class based on special flutter class: StatelessWidget().
+To do so, we need to import a file from the flutter package called 'material.dart' and then we define the widget using the keywork "extends" + "StatelessWidget" or "StatefulWidget". We also have to implement a special method (function) inside the class: the **build()** method. This method is called by flutter and takes an argument called "context" of type BuildContext, and it is provided by flutter. build() returns a Widget (which is also a class provided by the material.dart)
+Everything that belongs to a widget should go into the same class, so that the widget is a standalone unit. We can add functions to a widget class, we call it methods, but it's still a function.
 
+```dart
+import 'package:flutter/material.dart';
+void main() {
+    //runApp is a special function provided by material.dart. It construct the widget and calls the build() method.
+    runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+    Widget build(BuildContext context) {
+        return MaterialApp(home: Text('hello world'),);//a named argument called 'home'
+    }
+}
+```
+#### Visible and Invisible widgets
+- There are **Visible** widgets, for Output & Input. For example the button, text, card... that are drown onto the screen and the user can see them.
+- There are **Invisible** widgets that help us with Layout & Control for the structure of our app. For example Row, Column, ListView... 
+There is the Contaner() widget, that by default is invisible but you can give some style and it could become visible.
 
+### Scaffold
+Is a widget available thanks to having imported material.dart. It has the job of creating a base page designing, coloring and structure for the app.
+It takes some named arguments
+- appBar: an AppBar() widget
+- body: here we will all the widget tree of the page. It accepts only one widget, so we need to pass a widget with a children parameter (not child but children), for example the Column() widget, that takes a list of widgets in the children parameter.
 
+> Tip: the *flutter extension* will autoformat our code in a very readable way if we add a comma after closing parentesis.
 
+## Understanding "State"
+In general, State is Data/information used in our app. We can differentiate between:
+- **App State**, data that is used widely in the entire app, or in a large number of screens. For example authenticated users, loaded jobs, etc.
+- **Widget State**, data that is used in one or few screens, for example: current user input, is a loading spinner being shown, etc.
+
+Depending on if a widget needs to have a State that could change or not, we have 2 types of widgets:
+- **StatelessWidget**: It doesn't have state.
+    - We provide Input Data to create it.
+    - It gets re-rendered when the external input data changes, but inside the widget class, the data will never change. Only receives new data from outside.
+- **StatefulWidget**: It has State, It can change when its state changes
+    - We also provide input data to create it
+    - We can have an Internal State. The widget will be re-rendered when either the external input data or internal State changes.
+
+### StatefulWidget
+
+Is a combination of two classes: 
+- The widget class: one that extends StatefulWidget. It will be rebuilt when the state changes.
+    - We should use the builtin method createState() returning the StateObject 
+- The classState: extends State. It will be persistent.
+    - In the State class wi add a <pointer> to the widget class
+    - When we want flutter to run the build method, we have to call SetState(). SetState takes a function, so in here we create an anonymous function and inside it we change the value of the data that the UI depends on.
+```dart
+class MyApp extends StatefulWidget {
+    @override
+    State<StatefulWidget> createState() {
+        return MyAppState();
+    }
+}
+class MyAppState extends State<MyApp> {
+    var displayed_text = 'hello';
+    Widget build(BuildContext context) {
+        return MaterialApp(home: Scaffold(
+            appBar: AppBar(
+                title: Text('My First App'),
+            ),
+            body: Column(
+                children: [
+                    Text(text),
+                    RaisedButton(
+                        child: Text(displayed_text), // this text will change when the user presses the button as we are updating the displayed_text value inside setState and we are in a Stateful Widget.
+                        onPressed: (
+                            setState(){
+                                (){
+                                    text = 'bye bye';
+                                },
+                            },
+                        )
+                    )
+                ]
+            )
+        ),);
+    }
+}
+```
 
