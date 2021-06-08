@@ -145,10 +145,28 @@ void main(){
 // is the same as:
 void main() => print(hello);
 ```
+#### Passing a pointer to a function
+When we use a widget that takes a function as a parameter, we should provide a pointer to that function, not the function itself. So we should provide the name of the function without parentesis. Becouse if we provide the parentesis, we'll be telling flutter that the value of the parameter will be the result of the function, not the function itself.
+```dart
+onPressed: answerQuestion(), // WRONG! in the build method flutter will execute the function, it won't wait for the user to press the button.
+onPressed: answerQuestion, // CORRECT. The function will be executed with the onPressed event.
+```
+#### Anonymous functions
+When we have a function that you only need in one place and we are **not calling it from anywhere else**, we can use an anonymous function. It's like a normal (named) function but without the name. 
+We can use the curly braces or the arrow:
+```dart
+onPressed: () => print('hola')) // short form, for only one expression function
+onPressed: () {
+    // long form, for more than one expressions.
+    print('hola');
+}), 
+```
+For both examples, it's only the definition of a function, so it's not executed in the build method but it's executed in the onPressed event, so it's great for having it inside the widget arguments.
 
 ### The widget class
 A widget is a special type of object in flutter. To create a widget, we need to create a class based on special flutter class: StatelessWidget().
 To do so, we need to import a file from the flutter package called 'material.dart' and then we define the widget using the keywork "extends" + "StatelessWidget" or "StatefulWidget". We also have to implement a special method (function) inside the class: the **build()** method. This method is called by flutter and takes an argument called "context" of type BuildContext, and it is provided by flutter. build() returns a Widget (which is also a class provided by the material.dart)
+Everything that belongs to a widget should go into the same class, so that the widget is a standalone unit. We can add functions to a widget class, we call it methods, but it's still a function.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -216,9 +234,39 @@ void main(){
 Is a widget available thanks to having imported material.dart. It has the job of creating a base page designing, coloring and structure for the app.
 It takes some named arguments
 - appBar: an AppBar() widget
-- body: here we will all the widget tree of the page
+- body: here we will all the widget tree of the page. It accepts only one widget, so we need to pass a widget with a children parameter (not child but children), for example the Column() widget, that takes a list of widgets in the children parameter.
 
 > Tip: the *flutter extension* will autoformat our code in a very readable way if we add a comma after closing parentesis.
+
+### Different types of widgets
+- There are **Visible** widgets, for Output & Input. For example the button, text, card... that are drown onto the screen and the user can see them.
+- There are **Invisible** widgets that help us with Layout & Control for the structure of our app. For example Row, Column, ListView... 
+There is the Contaner() widget, that by default is invisible but you can give some style and it could become visible.
+
+### Lists
+Lists is a type of data that consists on a group of items. In other languages are called **arrays**. It is defined in squared brackets and it's normally used to group related data. 
+```dart
+// This is a list of Strings. We use the "\" character to scape the next character.
+var names = ['Eloi', 'Marti', 'Gemma'];
+```
+To access an element in the list, we can use the builtin .elementAt(index) method or just indicate the index between []. IMPORTANT: The lists **start at index 0**.
+```dart
+    questions.elementAt(0); // using the List.elementAt() method
+    questions[0]; // using the short form
+```
+To find how many items are in a list we use .lenght
+```dart
+    print(questions.lenght); //prints 2
+```
+Dart also offers **many methods** (functions that belong to an object) on the List object (like every other value in Dart, lists are an object).
+```dart
+questions.add('Celeste'); // this adds 'Celeste' as a new element to the end of the list 
+questions.remove('Marti'); // this removes 'Marti' from the list, all other items would move and fill the gap
+```
+[More info about Lists](https://dart.dev/guides/language/language-tour#lists)
+### The Null value
+"null" is a value that means **nothing**
+
 
 
 
