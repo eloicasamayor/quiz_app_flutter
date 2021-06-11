@@ -92,8 +92,9 @@ There are some special types of predefined objects in dart. Some of them are:
 - **Integer**: numbers without decimal places
 - **double**: numbers with decimal places.
 - **num**: any number: can be double or int
+- **bool**: a boolean can be true or false.
 #### The Null value
-"null" is a value that means **nothing**
+"null" is a value that means **nothing**. Can be asigned to any type. Normally we would use it to reset the value of a variable.
 
 ### Variables
 We can store data in memory with the help of variables so we can use that data some lines later in the same code. We don't want to store it in a file or in a database, but in the memory of the device.
@@ -227,8 +228,31 @@ class _MyPrivateClass {
     }
 }
 ```
-### Final properties
-When we use the keywork "**final**" before the declaration of a variable, we are telling dart that the value of the variable won't change after the initialization.
+### Constant and Final variables
+#### Final
+When we use the keywork "**final**" before the declaration of a variable, we are telling dart that the value of the variable won't change after the initialization. It can change everytime we initialize, but when initialized it can't change.
+> **FINAL: Run time constant value**
+#### Const
+When we have a variable that has an asigned value that won't change anytime, we must indicate it by adding "const" before it. It's value is constant in run time and also in compile time.
+> **CONST: Compile time constant value**
+
+### Getters
+Getters are a mixture between a property and a method. We define a getter by:
+- define the type of value we want to get
+- the "get" keyword
+- the getter name
+- the getter body between {curly braces}
+```dart
+String get resultPhrase {
+    String resultText;
+    if (resultScore >= 8){
+        resultText = 'you win!';
+    }else{
+        resultText = 'you loose!';
+    }
+    return resultText;
+}
+```
 
 ### Lists
 Lists is a type of data that consists on a group of items. In other languages are called **arrays**. It is defined in squared brackets and it's normally used to group related data. 
@@ -389,4 +413,41 @@ The map() method executes a function on every element on the list where we are c
 
 ### Managing the State: "Lifting the State Up"
 The most primitive form of managing the State and sharing it betwen widgets is called "Lifting the State Up". It consists on having the State Data in the part of the widget tree that is common on all widgets where will be needed and pass the data as arguments in the constructors. So to have the State in the parent of all widgets that need it.
+
+### The IF statment
+- To run the code conditionally we can use the **if** keyword followed by a condition in parentesis. Then, surrounded by curly braces will be the code that should run only if the condition is met, so if the condition returns true.
+- We can combine it with the **else if** keyword, that will trigger some code if the condition of the previous if returns false and if it returns true to the new condition.
+- And also can add an **else** block, to add code that would exectue if the previous ir or if else returns false.
+- We can elaborate complex conditions by combining boolean operators
+    - == equal to
+    - < smaller than
+    - \> bigger than
+    - <= smaller or equal to
+    - \>= bigger or equal to 
+    - != not equal to
+And also joining operators
+    - || or
+    - && and
+And grouping the operations with parentesis, as mathematical equations.
+```dart
+if(_questionIndex > 4){
+    //this code will execute when _questionIndex is bigger than 4
+}else if(_questionIndex ==4){
+    //this code will execute when _questionIndex equal to 4.
+}else{
+    //this code will execute when _questionIndex is smaller than 4.
+}
+```
+#### Outputting widgets conditionally
+There is a short form of using conditions in dart, and it has 4 pieces
+- The condition
+- Question mark (?)
+- The code that should run if the condition returns true
+- Colon (:)
+- The code that should run if the condition returns false
+```dart
+(_question < 3) 
+    ? Text('The question index is smaller than 3')
+    : Text('The question index is greater or equal to 3')
+```
 
