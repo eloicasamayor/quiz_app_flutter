@@ -1,8 +1,13 @@
-# Learning flutter: my first app
+# Quiz app
+> Learning Flutter: Chapter I
 
 I am following this udemy course [Flutter & Dart - The Complete Guide [2021 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). This project has the only objective form me to code along the course and to learn. 
 
 > Here I've been taking notes while following the course. It may be incomplete. The only purpose of this project is to learn learn dart and flutter and to keep it posted so I can review it any time when needed.
+
+## Deployment
+The app is deployed in [GitHub Pages](https://eloicasamayor.github.io/quiz_app_flutter/)
+> I've deployed in GH Pages just for leaning purposes, I haven't adapted the UI for the web.
 
 ## Create flutter project
 Command to create a flutter project from the terminal. The project name cannot contain spaces or dashes
