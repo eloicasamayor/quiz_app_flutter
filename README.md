@@ -3,7 +3,40 @@
 
 I am following this udemy course [Flutter & Dart - The Complete Guide [2021 Edition]](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). This project has the only objective form me to code along the course and to learn. 
 
+
+# Learning notes
 > Here I've been taking notes while following the course. It may be incomplete. The only purpose of this project is to learn learn dart and flutter and to keep it posted so I can review it any time when needed.
+
+- [Create Flutter Project](#create-flutter-project)
+- [Material Design](#material-design)
+- [Flutter vs alternatives](#flutter-vs-alternatives)
+- [IDE: Visual Studio Code](#ide-visual-studio-code)
+- [Emulator](#emulator)
+- [Some Dart basics](#some-dart-basics)
+  - [Comments](#comments)
+  - [Functions](#functions)
+  - [Objects](#objects)
+  - [Variables](#variables)
+  - [Classes](#classes)
+  - [The Constructor](#the-constructor)
+  - [Private classes, functions and variables](#private-classes-functions-and-variables)
+  - [Constant and Final variables](#constant-and-final-variables)
+  - [Getters](#getters)
+  - [Lists](#lists)
+  - [Maps](#maps)
+- [Widgets](#widgets)
+  - [The widget class](#the-widget-class)
+  - [Scaffold](#scaffold)
+- [Understanding "State"](#understanding-state)
+  - [StatefulWidget](#statefulwidget)
+  - [Mapping Lists to Widgets](#mapping-lists-to-widgets)
+  - [Managing the State: "Lifting the State Up"](#managing-the-state-lifting-the-state-up)
+  - [The IF statment"](#the-if-statment)
+
+  
+
+
+
 
 ## Deployment
 The app is deployed in [GitHub Pages](https://eloicasamayor.github.io/quiz_app_flutter/)
