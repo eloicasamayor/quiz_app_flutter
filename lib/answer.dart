@@ -14,13 +14,14 @@ class Answer extends StatelessWidget {
         horizontal: 50,
       ),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          onSurface: Colors.blue,
-          padding: EdgeInsets.all(30),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white30),
+          padding: MaterialStateProperty.all(EdgeInsets.all(20)),
+          elevation: MaterialStateProperty.all(0),
         ),
         child: Text(
           answerText,
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
         onPressed: selectHandler,
       ),

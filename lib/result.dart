@@ -27,8 +27,21 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
+    return Stack(children: [
+      Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+              Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+            ],
+            end: Alignment.topLeft,
+            begin: Alignment.bottomRight,
+            stops: [0, 1],
+          ),
+        ),
+      ),
+      Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -47,16 +60,23 @@ class Result extends StatelessWidget {
             TextButton(
               onPressed: resetHandler,
               style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white30),
                 textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20)),
                 padding: MaterialStateProperty.all(EdgeInsets.all(35)),
               ),
-              child: Text('Restart Quiz'),
+              child: Text(
+                'Restart Quiz',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             Expanded(
               flex: 3,
               child: Container(),
             ),
           ]),
-    );
+    ]);
   }
 }

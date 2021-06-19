@@ -18,6 +18,7 @@ class Question extends StatelessWidget {
       // como otros widgets visibles, el Container consta del child (body), padding, border y margin.
       width: double.infinity, //significa que ocupará de ancho lo mas que pueda.
       margin: EdgeInsets.only(top: 60, bottom: 40),
+
       //la clase EdgeInsets tiene diferentes constructores, para crear EdgeInsets con diferentes configuraciones.
       child: Text(
         // Por defecto, el widget Text ocupa solamente lo necesario. Para poder centrarlo necesitamos meterlo dentro de un container.

@@ -91,6 +91,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Quiz App'),
+          backgroundColor: Colors.purpleAccent,
         ),
         body: _questionIndex < _questions.length
             ? Quiz(
