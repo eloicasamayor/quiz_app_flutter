@@ -17,6 +17,7 @@ class Quiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         //(27) -> nuevo custom widget.
         Question(questions[questionIndex]['questionText']),
@@ -24,10 +25,11 @@ class Quiz extends StatelessWidget {
         ...(questions[questionIndex]['answer'] as List<Map<String, Object>>)
             .map((answer) {
           return Answer(
-              () => answerQuestion(answer['score']),
-              answer[
-                  'text']); //usamos una función anónima que flutter no la ejecutará cuando esté haciendo el build(). En el cuerpo de esta función anónima, llamamos a la función que queremos que se ejecute onPressed
-        }).toList()
+            () => answerQuestion(answer['score']),
+            answer['text'],
+          ); //usamos una función anónima que flutter no la ejecutará cuando esté haciendo el build(). En el cuerpo de esta función anónima, llamamos a la función que queremos que se ejecute onPressed
+        }).toList(),
+
         // (33)
         // para cualquier lista (array), podemos usar el método map()
         // el método map ejecutará una función (que tenemos que mandarle como argumento) para cada elemento en la lista.

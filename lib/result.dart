@@ -28,13 +28,35 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(children: <Widget>[
-        Text(
-          resultPhrase,
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-        ),
-        FlatButton(onPressed: resetHandler, child: Text('Restart Quiz'))
-      ]),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Container(),
+            ),
+            Text(
+              resultPhrase,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            TextButton(
+              onPressed: resetHandler,
+              style: ButtonStyle(
+                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20)),
+                padding: MaterialStateProperty.all(EdgeInsets.all(35)),
+              ),
+              child: Text('Restart Quiz'),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(),
+            ),
+          ]),
     );
   }
 }

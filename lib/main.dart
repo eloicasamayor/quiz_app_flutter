@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       ]
     },
     {
-      'questionText': 'What\'s your favorite aniaml?',
+      'questionText': 'What\'s your favorite animal?',
       'answer': [
         {'text': 'rabbit', 'score': 4},
         {'text': 'elefant', 'score': 7},
@@ -71,10 +71,10 @@ class _MyAppState extends State<MyApp> {
       _questionIndex = _questionIndex + 1;
     });
     if (_questionIndex < _questions.length) {
-      print('We have more questions!');
+      //print('We have more questions!');
     }
 
-    print(_questionIndex);
+    //print(_questionIndex);
   }
 
   //Las variable dentro de una clase se le llaman "property" (propiedad)
@@ -87,16 +87,19 @@ class _MyAppState extends State<MyApp> {
     // - positional arguments: each value passed ends up depending on the position
     // - named arguments: no data in order, target every argument by its name
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('My First App'),
-          ),
-          body: _questionIndex < _questions.length
-              ? Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: _questions)
-              : Result(_totalScore, _resetQuiz)),
+        appBar: AppBar(
+          title: Text('Quiz App'),
+        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(_totalScore, _resetQuiz),
+      ),
       //MaterialApp y Text no son funciones, sino clases. Y aún así, les pasamos información
       //el 'Constructor', es una función especial dentro de una clase (por lo tanto, un método) que se ejecuta solamente una vez cuando creamos un nuevo objeto basado en esa clase, o sea, cuando llamamos a una clase y le pasamos valores
       //se crea un constructor repitiendo el nombre de la clase, paréntesis y llaves
